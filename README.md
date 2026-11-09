@@ -36,15 +36,15 @@ Status: working in the Tinkercad simulator. The real hardware build is coming ne
 
 ## Circuit
 
-![Circuit diagram]screenshot(368).png
+![Circuit diagram](<images/Screenshot (368).png>)
 
 ## Demo
 
-![Demo]smart bin video.mp4
+[Watch the demo video](<images/smart bin video.mp4>)
 
 ## Code
 
-The full Arduino sketch is in [`smart_trash_bin.ino`](smart_trash_bin.ino).
+The full Arduino sketch is in [smart_trash_bin.txt.txt](smart_trash_bin.txt.txt).
 
 You can change these settings at the top of the file:
 
