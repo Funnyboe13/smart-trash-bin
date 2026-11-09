@@ -1,0 +1,51 @@
+#include <Servo.h>
+
+const int TRIG_PIN = 9;
+const int ECHO_PIN = 10;
+const int SERVO_PIN = 6;
+
+const int OPEN_DISTANCE_CM = 25;   // lid opens if something is closer than this
+const int CLOSED_ANGLE = 0;
+const int OPEN_ANGLE = 90;
+const unsigned long CLOSE_DELAY_MS = 5000;  // wait 5 seconds before closing
+
+Servo lid;
+unsigned long lastSeen = 0;
+bool isOpen = false;
+
+long readDistanceCm() {
+  digitalWrite(TRIG_PIN, LOW);
+  delayMicroseconds(2);
+  digitalWrite(TRIG_PIN, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(TRIG_PIN, LOW);
+  long duration = pulseIn(ECHO_PIN, HIGH, 30000);
+  if (duration == 0) return 999;  // nothing detected
+  return duration * 0.034 / 2;
+}
+
+void setup() {
+  pinMode(TRIG_PIN, OUTPUT);
+  pinMode(ECHO_PIN, INPUT);
+  lid.attach(SERVO_PIN);
+  lid.write(CLOSED_ANGLE);
+}
+
+void loop() {
+  long distance = readDistanceCm();
+
+  if (distance < OPEN_DISTANCE_CM) {
+    lastSeen = millis();
+    if (!isOpen) {
+      lid.write(OPEN_ANGLE);
+      isOpen = true;
+    }
+  }
+
+  if (isOpen && millis() - lastSeen > CLOSE_DELAY_MS) {
+    lid.write(CLOSED_ANGLE);
+    isOpen = false;
+  }
+
+  delay(100);
+}
