@@ -36,11 +36,11 @@ Status: working in the Tinkercad simulator. The real hardware build is coming ne
 
 ## Circuit
 
-![Circuit diagram](images/circuit.png)
+![Circuit diagram]screenshot(368).png
 
 ## Demo
 
-![Demo](images/demo.mp4)
+![Demo]smart bin video.mp4
 
 ## Code
 
